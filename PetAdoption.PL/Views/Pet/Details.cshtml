@@ -1,0 +1,40 @@
+﻿@model PetAdoption.BL.DTOs.PetDTO
+
+<h2>Pet Details</h2>
+
+<div class="card" style="max-width:500px; padding:20px;">
+    <div class="mb-3">
+       
+        @if (!string.IsNullOrEmpty(Model.ImageBase64))
+        {
+            <img src="data:image/jpeg;base64,@Model.ImageBase64"
+                 style="width:100%; height:200px; object-fit:cover; border-radius:8px;" />
+        }
+        else
+        {
+            <p>No Image</p>
+        }
+    </div>
+
+    <table class="table">
+        <tr><td><b>Name</b></td><td>@Model.Name</td></tr>
+        <tr><td><b>Type</b></td><td>@Model.Type</td></tr>
+        <tr><td><b>Age</b></td><td>@Model.Age years</td></tr>
+        <tr>
+            <td><b>Status</b></td>
+            <td>
+                @if (Model.IsAdopted)
+                {
+                    <span class="badge bg-secondary">Adopted</span>
+                }
+                else
+                {
+                    <span class="badge bg-success">Available</span>
+                }
+            </td>
+        </tr>
+    </table>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

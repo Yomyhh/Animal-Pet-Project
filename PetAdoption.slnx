@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="PetAdoption.BL/PetAdoption.BL.csproj" />
+  <Project Path="PetAdoption.DAL/PetAdoption.DAL.csproj" />
+  <Project Path="PetAdoption.PL/PetAdoption.PL.csproj" />
+</Solution>
