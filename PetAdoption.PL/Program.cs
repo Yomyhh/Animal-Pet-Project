@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetAdoption.BL.Interfaces;
 using PetAdoption.BL.Services;
@@ -23,15 +24,28 @@ namespace PetAdoption.PL
                  options.UseSqlServer(
                      builder.Configuration.GetConnectionString("DefaultConnection")));
 
+          //  builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+
 
             builder.Services.AddScoped<IPetRepo, PetRepo>();
             builder.Services.AddScoped<IPetService, PetService>();
+       
+    
 
-          //  builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<AppDbContext>()
-             //   .AddDefaultTokenProviders();
+          /*
+           builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+          .AddEntityFrameworkStores<AppDbContext>()
+          .AddDefaultTokenProviders();
 
-
+            */
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+            });
+            builder.Services.AddRazorPages();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -45,14 +59,17 @@ namespace PetAdoption.PL
             app.UseHttpsRedirection();
             app.UseRouting();
 
-          //  app.UseAuthentication();
+           app.UseAuthentication();
            app.UseAuthorization();
-
+           
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
+
+            app.MapRazorPages();
+
 
             app.Run();
         }

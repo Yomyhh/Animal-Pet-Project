@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetAdoption.BL.DTOs;
 using PetAdoption.BL.Interfaces;
 
@@ -27,13 +28,14 @@ namespace PetAdoption.PL.Controllers
             if (pet == null) return NotFound();
             return View(pet);
         }
-      
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CreatePetDTO dto)
         {
@@ -44,7 +46,7 @@ namespace PetAdoption.PL.Controllers
             }
             return View(dto);
         }
-
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var pet = _petService.GetPetById(id);
@@ -62,6 +64,7 @@ namespace PetAdoption.PL.Controllers
         }
                  
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, CreatePetDTO dto)
         {
@@ -73,7 +76,7 @@ namespace PetAdoption.PL.Controllers
             return View(dto);
         }
 
-       
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var pet = _petService.GetPetById(id);
@@ -82,6 +85,7 @@ namespace PetAdoption.PL.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
