@@ -17,7 +17,8 @@ namespace PetAdoption.BL.Mapping
                 Type = dto.Type,
                 Age = dto.Age,
                 Description = dto.Description,
-                ImageBase64 = dto.ImageBase64
+                ImageBase64 = dto.ImageBase64,
+                CategoryId= dto.CategoryId
             };
         }
 
@@ -30,7 +31,8 @@ namespace PetAdoption.BL.Mapping
                 Type = pet.Type,
                 Age = pet.Age,
                 Description = pet.Description,
-                ImageBase64 = pet.ImageBase64
+                ImageBase64 = pet.ImageBase64,
+                CategoryId= pet.CategoryId
             };
         
         }

@@ -17,5 +17,7 @@ namespace PetAdoption.DAL
          
         }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
     }
 }

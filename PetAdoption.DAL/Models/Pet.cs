@@ -13,5 +13,9 @@ namespace PetAdoption.DAL.Models
         public string? Description { get; set; }
         public bool IsAdopted { get; set; }
         public string? ImageBase64 { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace PetAdoption.BL.DTOs
         public string? Description { get; set; }
         public IFormFile? ImageFile { get; set; }
         public string? ImageBase64 { get; set; }
+        public int CategoryId { get; set; }
     }
 }
