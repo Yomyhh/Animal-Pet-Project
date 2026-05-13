@@ -20,3 +20,4 @@ namespace PetAdoption.DAL.Migrations
         }
     }
 }
+

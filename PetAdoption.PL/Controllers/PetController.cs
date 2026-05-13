@@ -28,14 +28,14 @@ namespace PetAdoption.PL.Controllers
             if (pet == null) return NotFound();
             return View(pet);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CreatePetDTO dto)
         {
@@ -46,7 +46,7 @@ namespace PetAdoption.PL.Controllers
             }
             return View(dto);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var pet = _petService.GetPetById(id);
@@ -64,7 +64,7 @@ namespace PetAdoption.PL.Controllers
         }
                  
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, CreatePetDTO dto)
         {
@@ -76,7 +76,7 @@ namespace PetAdoption.PL.Controllers
             return View(dto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var pet = _petService.GetPetById(id);
@@ -85,7 +85,7 @@ namespace PetAdoption.PL.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {

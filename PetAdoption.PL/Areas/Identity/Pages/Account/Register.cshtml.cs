@@ -83,6 +83,7 @@ namespace PetAdoption.PL.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Admin");
                     _logger.LogInformation("User created successfully.");
 
                     // 🔥 مباشر تسجيل دخول بدون Email Confirmation
