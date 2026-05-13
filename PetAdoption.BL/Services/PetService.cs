@@ -1,5 +1,6 @@
 ﻿using PetAdoption.BL.DTOs;
 using PetAdoption.BL.Interfaces;
+using PetAdoption.BL.Mapping;
 using PetAdoption.DAL.Interfaces;
 using PetAdoption.DAL.Models;
 using PetAdoption.DAL.Repos;
@@ -31,16 +32,13 @@ namespace PetAdoption.BL.Services
                 imageBase64 = Convert.ToBase64String(bytes);
             }
 
-            var pet = new Pet
-            {
-                Name = dto.Name,
-                Type = dto.Type,
-                Age = dto.Age,
-                Description = dto.Description,
-               ImageBase64 = imageBase64,
-                IsAdopted = false,
 
-            };
+            var pet = dto.ToEntity();
+
+            pet.ImageBase64 = imageBase64;
+            pet.IsAdopted = false;
+
+            
             _petRepo.Add(pet);
             _petRepo.Save();
         }
@@ -54,15 +52,8 @@ namespace PetAdoption.BL.Services
 
         public IEnumerable<PetDTO> GetAllPets()
         {
-            return _petRepo.GetALL().Select(p => new PetDTO
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Type = p.Type,
-                Age = p.Age,
-                IsAdopted = p.IsAdopted,
-                ImageBase64 = p.ImageBase64
-            });
+            return _petRepo.GetALL().Select(p => p.ToDTO());
+            
         }
 
         public IEnumerable<PetDTO> GetAvailablePets()
@@ -70,15 +61,7 @@ namespace PetAdoption.BL.Services
 
             return _petRepo.GetALL()
                 .Where(p => !p.IsAdopted)
-                .Select(p => new PetDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Type = p.Type,
-                    Age = p.Age,
-                    IsAdopted = p.IsAdopted,
-                    ImageBase64 = p.ImageBase64
-                });
+                .Select(p => p.ToDTO());
         }
 
         public PetDTO GetPetById(int id)
@@ -87,16 +70,8 @@ namespace PetAdoption.BL.Services
             if (P == null)
                 return null;
 
-            return new PetDTO
-            {
-                Id = P.Id,
-                Name = P.Name,
-                Type = P.Type,
-                Age = P.Age,
-                IsAdopted = P.IsAdopted,
-                ImageBase64 = P.ImageBase64
-            };
-                 
+            return P.ToDTO();
+
         }
 
         public void UpdatePet(int id, CreatePetDTO dto)
