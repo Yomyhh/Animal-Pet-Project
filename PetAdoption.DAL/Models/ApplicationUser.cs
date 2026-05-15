@@ -7,6 +7,8 @@ namespace PetAdoption.DAL.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ICollection<AdoptionRequest> AdoptionRequests { get; set; }
+
     }
 
 

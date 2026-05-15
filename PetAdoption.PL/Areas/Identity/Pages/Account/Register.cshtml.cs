@@ -83,13 +83,9 @@ namespace PetAdoption.PL.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Admin");
+                    await _userManager.AddToRoleAsync(user, "User");
                     _logger.LogInformation("User created successfully.");
-
-                    // 🔥 مباشر تسجيل دخول بدون Email Confirmation
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    return LocalRedirect(returnUrl);
+                    return RedirectToPage("Login");
                 }
 
                 foreach (var error in result.Errors)

@@ -17,5 +17,5 @@ namespace PetAdoption.PL.Seed
                 await roleManager.CreateAsync(new IdentityRole("User"));
             }
           }
-        }
+    }
 }

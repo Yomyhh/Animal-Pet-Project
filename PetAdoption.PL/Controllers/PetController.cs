@@ -22,6 +22,7 @@ namespace PetAdoption.PL.Controllers
             return View(pets);
         }
 
+
         public IActionResult Details(int id)
         {
             var pet = _petService.GetPetById(id);
