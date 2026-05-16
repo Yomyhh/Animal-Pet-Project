@@ -38,9 +38,13 @@ namespace PetAdoption.DAL.Repos
         public AdoptionRequest GetById(int id)
         {
             return _context.AdoptionRequests
-                .Include(x => x.Pet)
-                .Include(x => x.User)
-                .FirstOrDefault(x => x.Id == id);
+        .Include(x => x.Pet)
+        .FirstOrDefault(x => x.Id == id);
+        }
+
+        public void AddNotification(Notification notification)
+        {
+            _context.Notifications.Add(notification);
         }
     }
 }

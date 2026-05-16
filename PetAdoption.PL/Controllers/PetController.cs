@@ -18,7 +18,8 @@ namespace PetAdoption.PL.Controllers
 
         public IActionResult Index()
         {
-            var pets = _petService.GetAvailablePets();
+            var pets = _petService.GetAllPets();
+
             return View(pets);
         }
 

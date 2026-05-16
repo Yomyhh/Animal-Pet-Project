@@ -14,5 +14,6 @@ namespace PetAdoption.BL.DTOs
         public bool IsAdopted { get; set; }
         public string? ImageBase64 { get; set; }
         public int CategoryId { get; internal set; }
+        public string Status { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PetAdoption.BL.Interfaces;
 using PetAdoption.DAL.Models;
 
@@ -31,8 +32,12 @@ public class AdoptionController : Controller
     public IActionResult Approve(int id)
     {
         _service.Approve(id);
+
+        TempData["Msg"] = "Request Approved Successfully";
+
         return RedirectToAction("Requests");
     }
+
 
     [Authorize(Roles = "Admin")]
     public IActionResult Reject(int id)
@@ -40,4 +45,5 @@ public class AdoptionController : Controller
         _service.Reject(id);
         return RedirectToAction("Requests");
     }
+
 }

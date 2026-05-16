@@ -17,7 +17,8 @@ namespace PetAdoption.DAL.Models
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
-
+       
+        public string Status { get; set; }= "Available";
         public ICollection<AdoptionRequest> AdoptionRequests { get; set; }
 
     }

@@ -20,5 +20,8 @@ namespace PetAdoption.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<AdoptionRequest> AdoptionRequests { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
+
     }
 }

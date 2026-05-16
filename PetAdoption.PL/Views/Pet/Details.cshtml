@@ -3,29 +3,44 @@
 <h2>Pet Details</h2>
 
 <div class="card" style="max-width:500px; padding:20px;">
+
     <div class="mb-3">
-       
+
         @if (!string.IsNullOrEmpty(Model.ImageBase64))
         {
             <img src="data:image/jpeg;base64,@Model.ImageBase64"
-                 style="width:100%; height:200px; object-fit:cover; border-radius:8px;" />
+                 style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
         }
         else
         {
             <p>No Image</p>
         }
+
     </div>
 
     <table class="table">
-        <tr><td><b>Name</b></td><td>@Model.Name</td></tr>
-        <tr><td><b>Type</b></td><td>@Model.Type</td></tr>
-        <tr><td><b>Age</b></td><td>@Model.Age years</td></tr>
+
+        <tr>
+            <td><b>Name</b></td>
+            <td>@Model.Name</td>
+        </tr>
+
+        <tr>
+            <td><b>Type</b></td>
+            <td>@Model.Type</td>
+        </tr>
+
+        <tr>
+            <td><b>Age</b></td>
+            <td>@Model.Age years</td>
+        </tr>
+
         <tr>
             <td><b>Status</b></td>
             <td>
-                @if (Model.IsAdopted)
+                @if (Model.Status == "Sold Out")
                 {
-                    <span class="badge bg-secondary">Adopted</span>
+                    <span class="badge bg-secondary">Sold Out</span>
                 }
                 else
                 {
@@ -33,12 +48,27 @@
                 }
             </td>
         </tr>
+
     </table>
+
     <a asp-action="Index" class="btn btn-secondary">Back</a>
-    <a asp-controller="Adoption"
-       asp-action="Adopt"
-       asp-route-petId="@Model.Id"
-       class="btn btn-success">
-        Adopt
-    </a>
+
+    <br /><br />
+
+    @if (Model.Status != "Sold Out")
+    {
+        <a asp-controller="Adoption"
+           asp-action="Adopt"
+           asp-route-petId="@Model.Id"
+           class="btn btn-success">
+            Adopt
+        </a>
+    }
+    else
+    {
+        <button class="btn btn-secondary" disabled>
+            Sold Out
+        </button>
+    }
+
 </div>

@@ -3,16 +3,16 @@
 @if (TempData["Msg"] != null)
 {
     <div id="toast" style="
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #28a745;
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                z-index: 9999;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            ">
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        ">
         @TempData["Msg"]
     </div>
 }
@@ -27,25 +27,29 @@
 }
 
 <table class="table">
+
     <thead>
         <tr>
             <th>Image</th>
             <th>Name</th>
             <th>Type</th>
             <th>Age</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
 
     <tbody>
+
         @foreach (var pet in Model)
         {
             <tr>
+
                 <td>
                     @if (!string.IsNullOrEmpty(pet.ImageBase64))
                     {
                         <img src="data:image/jpeg;base64,@pet.ImageBase64"
-                             style="width:60px; height:60px; object-fit:cover; border-radius:8px;" />
+                             style="width:60px;height:60px;object-fit:cover;border-radius:8px;" />
                     }
                     else
                     {
@@ -58,29 +62,44 @@
                 <td>@pet.Age</td>
 
                 <td>
-                    <!-- USER + ADMIN -->
-                    <a asp-action="Details" asp-route-id="@pet.Id"
+                    @if (pet.Status == "Sold Out")
+                    {
+                        <span class="badge bg-secondary">Sold Out</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@pet.Id"
                        class="btn btn-info btn-sm">
                         Details
                     </a>
 
-                    <!-- ADMIN ONLY -->
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="Edit" asp-route-id="@pet.Id"
+                        <a asp-action="Edit"
+                           asp-route-id="@pet.Id"
                            class="btn btn-warning btn-sm">
                             Edit
                         </a>
 
-                        <a asp-action="Delete" asp-route-id="@pet.Id"
+                        <a asp-action="Delete"
+                           asp-route-id="@pet.Id"
                            class="btn btn-danger btn-sm">
                             Delete
                         </a>
                     }
                 </td>
+
             </tr>
         }
+
     </tbody>
+
 </table>
 
 <script>

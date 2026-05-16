@@ -12,5 +12,7 @@ namespace PetAdoption.DAL.Interfaces
         IQueryable<AdoptionRequest> GetAll();
         void Update(AdoptionRequest request);
         AdoptionRequest GetById(int id);
+
+        void AddNotification(Notification notification);
     }
 }

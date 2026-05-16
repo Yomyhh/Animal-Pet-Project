@@ -32,7 +32,8 @@ namespace PetAdoption.BL.Mapping
                 Age = pet.Age,
                 Description = pet.Description,
                 ImageBase64 = pet.ImageBase64,
-                CategoryId= pet.CategoryId
+                CategoryId= pet.CategoryId,
+                Status = pet.Status
             };
         
         }
