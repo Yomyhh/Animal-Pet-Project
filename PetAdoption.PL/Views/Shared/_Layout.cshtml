@@ -3,50 +3,251 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PetAdoption.PL</title>
+
+    <title>@ViewData["Title"] - Petopia </title>
+
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PetAdoption.PL.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/PetAdoption.PL.styles.css"
+          asp-append-version="true" />
+
+    <style>
+
+        body {
+            background-color: #f8f5f0;
+        }
+
+        .navbar {
+            background: #fff !important;
+            padding: 14px 25px;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #7b5e57 !important;
+        }
+
+        .nav-link {
+            color: #444 !important;
+            font-weight: 500;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+            .nav-link:hover {
+                color: #c58b5d !important;
+            }
+
+        footer {
+            background: white;
+            padding: 15px 0;
+        }
+
+        .main-container {
+            min-height: 80vh;
+        }
+
+    </style>
+
 </head>
+
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PetAdoption.PL</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <a class="navbar-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    🐾 Petopia
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse"
+                     id="navbarContent">
+
+                    <!-- LEFT SIDE -->
+                    <ul class="navbar-nav me-auto">
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Home
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
                     </ul>
+
+                    <!-- RIGHT SIDE -->
+                    <ul class="navbar-nav ms-auto">
+
+                        <!-- USER -->
+                        @if (User.Identity.IsAuthenticated &&
+                                                User.IsInRole("User"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Pet"
+                                   asp-action="Index">
+
+                                    🐶 Pets
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Notification"
+                                   asp-action="MyNotifications">
+
+                                    🔔 Notifications
+
+                                </a>
+
+                            </li>
+                        }
+
+                        <!-- ADMIN -->
+                        @if (User.Identity.IsAuthenticated &&
+                                                User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Pet"
+                                   asp-action="Index">
+
+                                    🐾 Manage Pets
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Adoption"
+                                   asp-action="Requests">
+
+                                    📋 Adoption Requests
+
+                                </a>
+
+                            </li>
+                        }
+
+                        <!-- NOT LOGGED IN -->
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Login">
+
+                                    Login
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Register">
+
+                                    Register
+
+                                </a>
+
+                            </li>
+                        }
+
+                        <!-- LOGOUT -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+
+                                <form method="post"
+                                      asp-area="Identity"
+                                      asp-page="/Account/Logout">
+
+                                    <button type="submit"
+                                            class="nav-link btn btn-link"
+                                            style="border:none;background:none;">
+
+                                        Logout
+
+                                    </button>
+
+                                </form>
+
+                            </li>
+                        }
+
+                    </ul>
+
                 </div>
+
             </div>
+
         </nav>
+
     </header>
-    <div class="container">
+
+    <div class="container main-container">
+
         <main role="main" class="pb-3">
+
             @RenderBody()
+
         </main>
+
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - PetAdoption.PL - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+        <div class="container text-center">
+
+            &copy; 2026 - 🐾 Pet Adoption System
+
         </div>
+
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 
-   
 </body>
 </html>

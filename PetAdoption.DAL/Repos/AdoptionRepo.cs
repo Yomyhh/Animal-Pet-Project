@@ -30,6 +30,7 @@ namespace PetAdoption.DAL.Repos
                 .Include(x => x.User);
         }
 
+
         public void Update(AdoptionRequest request)
         {
             _context.AdoptionRequests.Update(request);

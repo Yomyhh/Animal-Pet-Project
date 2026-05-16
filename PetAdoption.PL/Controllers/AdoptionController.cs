@@ -46,4 +46,12 @@ public class AdoptionController : Controller
         return RedirectToAction("Requests");
     }
 
+    [Authorize(Roles = "Admin")]
+    public IActionResult Requests()
+    {
+        var requests = _service.GetAllRequests();
+
+        return View(requests);
+    }
+
 }

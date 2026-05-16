@@ -1,8 +1,258 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+
+    body {
+        background-color: #f8f5f0;
+    }
+
+    .hero-section {
+        height: 90vh;
+        background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-content {
+        max-width: 700px;
+        padding: 20px;
+    }
+
+    .hero-title {
+        font-size: 65px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-text {
+        font-size: 22px;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    .hero-btn {
+        background: #d6a77a;
+        color: white;
+        padding: 14px 35px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+        .hero-btn:hover {
+            background: #bf8d5d;
+            color: white;
+            transform: scale(1.05);
+        }
+
+    .features-section {
+        padding: 80px 0;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 60px;
+        color: #5c4438;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px 25px;
+        text-align: center;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        transition: 0.3s ease;
+        height: 100%;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+
+    .feature-icon {
+        font-size: 55px;
+        margin-bottom: 20px;
+    }
+
+    .feature-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #5c4438;
+    }
+
+    .feature-text {
+        color: #666;
+        line-height: 1.7;
+    }
+
+    .about-section {
+        background: white;
+        padding: 80px 40px;
+        border-radius: 25px;
+        margin-bottom: 60px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .about-title {
+        font-size: 38px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        color: #5c4438;
+    }
+
+    .about-text {
+        font-size: 18px;
+        color: #666;
+        line-height: 1.9;
+    }
+
+</style>
+
+<div class="hero-section">
+
+    <div class="hero-content">
+
+        <h1 class="hero-title">
+            Find Your Perfect Pet Companion 🐾
+        </h1>
+
+        <p class="hero-text">
+            Give lovely pets a second chance and discover your new best friend.
+            Our adoption system helps animals find caring homes full of love.
+        </p>
+
+        <a asp-controller="Pet"
+           asp-action="Index"
+           class="hero-btn">
+            Explore Pets
+        </a>
+
+    </div>
+
 </div>
+
+<div class="container">
+
+    <section class="features-section">
+
+        <h2 class="section-title">
+            Why Choose Us?
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🐶
+                    </div>
+
+                    <div class="feature-title">
+                        Healthy Pets
+                    </div>
+
+                    <p class="feature-text">
+                        All pets are carefully checked and cared for before adoption.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        ❤️
+                    </div>
+
+                    <div class="feature-title">
+                        Loving Homes
+                    </div>
+
+                    <p class="feature-text">
+                        We help pets find safe and loving families that truly care.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🏡
+                    </div>
+
+                    <div class="feature-title">
+                        Easy Adoption
+                    </div>
+
+                    <p class="feature-text">
+                        Simple and fast adoption process with notifications and approvals.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="about-section">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <h2 class="about-title">
+                    About Our Pet Adoption System
+                </h2>
+
+                <p class="about-text">
+                    Our platform is designed to connect adorable pets with caring people.
+                    Whether you are looking for a playful dog, a cute cat, or a small furry friend,
+                    we make the adoption journey smooth, safe, and enjoyable.
+                </p>
+
+                <p class="about-text">
+                    Every adoption helps give animals a better life and a loving forever home.
+                </p>
+
+            </div>
+
+            <div class="col-md-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1000&auto=format&fit=crop"
+                     class="img-fluid rounded-4 shadow"
+                     style="max-height:400px; object-fit:cover;" />
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+

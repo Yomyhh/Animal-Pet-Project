@@ -6,6 +6,7 @@ using PetAdoption.DAL;
 using PetAdoption.DAL.Interfaces;
 using PetAdoption.DAL.Models;
 using PetAdoption.DAL.Repos;
+using PetAdoption.DAL.Repositories;
 using PetAdoption.PL.Seed;
 
 namespace PetAdoption.PL
@@ -30,6 +31,8 @@ namespace PetAdoption.PL
             builder.Services.AddScoped<IAdoptionService, AdoptionService>();
             builder.Services.AddScoped<IAdoptionRepo, AdoptionRepo>();
 
+            builder.Services.AddScoped<INotificationRepo, NotificationRepo>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
             // Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()

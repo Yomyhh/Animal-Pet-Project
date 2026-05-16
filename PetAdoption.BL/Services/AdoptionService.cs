@@ -15,6 +15,7 @@ namespace PetAdoption.BL.Services
             _repo = repo;
         }
 
+
         public void Approve(int id)
         {
             var request = _repo.GetById(id);
@@ -24,15 +25,12 @@ namespace PetAdoption.BL.Services
 
             request.Status = "Approved";
 
-            if (request.Pet != null)
-            {
-                request.Pet.Status = "Sold Out";
-            }
+            request.Pet.Status = "Sold Out";
 
             _repo.AddNotification(new Notification
             {
                 UserId = request.UserId,
-                Message = $"Your adoption request for {request.Pet?.Name} has been APPROVED 🎉",
+                Message = $"Your adoption request for {request.Pet.Name} has been APPROVED 🎉",
                 IsRead = false
             });
 
